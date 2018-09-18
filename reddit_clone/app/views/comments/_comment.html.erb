@@ -1,0 +1,13 @@
+
+
+<a href="<%= comment_url(comment) %>"><%= truncate(comment.content, length: 30) %></a>  by <%= comment.author.username %>
+
+<% child_comments = all_comments.where(parent_comment_id: comment.id) %>
+
+<% if child_comments.length > 0 %>
+  <ul>
+    <% child_comments.each do |child| %>
+      <li><%= render 'comments/comment', comment: child, all_comments: @all_comments %></li>  
+    <% end %>
+  </ul>
+<% end %>

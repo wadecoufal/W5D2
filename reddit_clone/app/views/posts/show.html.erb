@@ -1,0 +1,29 @@
+<h1> <%= @post.title %> by <%= @post.author.username %></h1>
+
+<p>Content:
+  <%= @post.content %>
+</p>
+
+<a href="<%= edit_post_url(@post) %>">EDIT MEEEEE</a>
+<br>
+<a href="<%= new_post_comment_url(@post) %>">Add Comment</a>
+
+<h3>Subs</h3>
+<ul>
+  <% @post.subs.each do |sub| %>
+    <li><a href="<%= sub_url(sub) %>"><%= sub.title %></a></li>
+  <% end %>
+</ul>
+
+<h3>Comments</h3>
+<% @all_comments = @post.comments.includes(:author) %>
+<ul>
+  <% @all_comments.each do |comment| %>
+    
+    <% unless comment.parent_comment %>
+      <li>
+        <%= render 'comments/comment', comment: comment, all_comments: @all_comments%>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.new(params.require(:user).permit(:username, :password))
     if @user.save
       login(@user)
-      # redirect_to posts_url 
+      redirect_to subs_url 
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new

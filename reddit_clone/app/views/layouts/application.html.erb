@@ -19,6 +19,13 @@
         <input type="hidden" name="_method" value="delete">
         <input type="submit" name="" value="Log Out">
       </form>
+      
+      <a href="<%= new_sub_url %>">Create New Sub!!!</a>
+      <a href="<%= subs_url %>">All Subs</a>
+    <% end %>
+    
+    <% if flash[:errors] %>
+      <%= flash[:errors].each {|e| e} %>
     <% end %>
     
     
