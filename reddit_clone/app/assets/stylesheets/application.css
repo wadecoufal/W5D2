@@ -13,3 +13,64 @@
  *= require_tree .
  *= require_self
  */
+ 
+ body {
+   background-color: powderblue;
+   font-family: 'Allerta Stencil';
+   text-transform: lowercase;
+ }
+ 
+ ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+li {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+li:before {
+  content: "★";
+  color: #A56EF4;
+  padding-right: 5px;
+}
+ 
+ h1 {
+   font-size: 36px;
+ }
+ 
+ input[type="text"], input[type="password"]  {
+   background-color: #F8C6F5;
+   color: #42E10F;
+   border-radius: 5px;
+   padding: 4px;
+   font-family: 'Allerta Stencil';
+   text-transform: lowercase;
+ }
+ 
+ input[type='submit'] {
+   background-color: #C70039;
+   color: white;
+   border: 2px solid white;
+   border-radius: 5px;
+   padding: 4px;
+   font-family: 'Allerta Stencil';
+   text-transform: lowercase;
+ }
+
+ .nav {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   background-color: #FF5733;
+   color: white;
+   border-radius: 7px;
+   list-style: none;
+   justify-content: space-around;
+ }
+ 
+ .nav li {
+   
+ }

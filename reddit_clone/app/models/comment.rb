@@ -28,5 +28,15 @@ class Comment < ApplicationRecord
   has_many  :child_comments,
     foreign_key: :parent_comment_id,
     class_name: :Comment
+  
+  has_many :votes, as: :voteable
+  
+  def num_votes
+    sum = 0
+    votes.each do |v|
+      v.upvote ? sum += 1 : sum -= 1
+    end
+    sum
+  end
     
 end

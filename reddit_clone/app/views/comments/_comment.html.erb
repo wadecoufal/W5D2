@@ -1,8 +1,8 @@
 
 
-<a href="<%= comment_url(comment) %>"><%= truncate(comment.content, length: 30) %></a>  by <%= comment.author.username %>
+<a href="<%= comment_url(comment) %>"><%= truncate(comment.content, length: 50) %></a>  by <%= comment.author.username %>
 
-<% child_comments = all_comments.where(parent_comment_id: comment.id) %>
+<% child_comments = all_comments[comment.id] %>
 
 <% if child_comments.length > 0 %>
   <ul>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-
   resources :comments, only: [:show] do
     resources :comments, only: [:new, :create]
+    resources :votes, only: [:create]
   end
   
   resources :users, only: [:new, :create]
@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   
   resources :posts, except: [:index] do
     resources :comments, only: [:new, :create]
+    resources :votes, only: [:create]
   end
+  
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

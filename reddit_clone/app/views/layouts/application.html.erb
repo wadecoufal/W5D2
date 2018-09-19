@@ -4,31 +4,59 @@
     <title>RedditClone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href='https://fonts.googleapis.com/css?family=Allerta Stencil' rel='stylesheet'>
+    <link rel="stylesheet" href="/assets/application.css">
+    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    
-    <% if logged_in? %>
-      <h1>Welcome, <%= current_user.username %>!!!</h1>
-      
-      <form action="<%= session_url%>" method="post">
-        <%= auth_token %>
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" name="" value="Log Out">
-      </form>
-      
-      <a href="<%= new_sub_url %>">Create New Sub!!!</a>
-      <a href="<%= subs_url %>">All Subs</a>
-    <% end %>
-    
-    <% if flash[:errors] %>
-      <%= flash[:errors].each {|e| e} %>
-    <% end %>
-    
+    <header>
+      <div class="nav">
+        <% if logged_in? %>
+          <li><h1>★welcome, <%= current_user.username %>! you're on redditclone.com★</h1></li>
+          <li><form action="<%= new_sub_url %>" method="get">
+            <input type="submit" name="" value="Start a new sub!!">
+          </form></li>
+          <li><form action="<%= subs_url %>" method="get">
+            <input type="submit" name="" value="Home page!">
+          </form></li>
+        <% end %>
+        
+        <% if flash[:errors] %>
+          <%= flash[:errors].each {|e| e} %>
+        <% end %>
+      </div>
+    </header>
+
     
     <%= yield %>
+    
+    <footer>
+      <br>
+      <br>
+      <% if logged_in? %>
+        <form action="<%= session_url%>" method="post">
+          <%= auth_token %>
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" name="" value="Log Out">
+        </form>
+      <% else %>
+        <% unless request.original_fullpath == "/session/new"%>
+        <form action="<%= new_session_url%>" method="post">
+          <%= auth_token %>
+          <input type="hidden" name="_method" value="get">
+          <input type="submit" name="" value="Log In">
+        </form>
+        <% end %>
+        <% unless request.original_fullpath == "/users/new"%>
+        <form action="<%= new_user_url%>" method="post">
+          <%= auth_token %>
+          <input type="hidden" name="_method" value="get">
+          <input type="submit" name="" value="Sign Up">
+        </form>
+        <% end %>
+      <% end %>
+    </footer>
   </body>
 </html>

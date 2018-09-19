@@ -25,5 +25,25 @@ class Post < ApplicationRecord
     source: :sub
     
   has_many :comments
+  has_many :votes, as: :voteable
+  
+  def comments_by_parent_id
+    comments = self.comments
+    # return {} unless comments
+    temp = Hash.new { |h,k| h[k] = [] }
+    
+    comments.each do |comment|
+      temp[comment.parent_comment_id] << comment
+    end
+    temp
+  end
+  
+  def num_votes
+    sum = 0
+    votes.each do |v|
+      v.upvote ? sum += 1 : sum -= 1
+    end
+    sum
+  end
 
 end
